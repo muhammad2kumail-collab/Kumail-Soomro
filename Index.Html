@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUMAIL SOOMRO // Pro Sensitivity Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #07070a;
+            --panel: rgba(15, 15, 25, 0.7);
+            --cyan: #00f3ff;
+            --magenta: #ff0055;
+            --text: #f0f0f5;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
+        body { background: var(--bg); color: var(--text); padding: 20px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background-image: radial-gradient(circle at 50% 0%, #140e2b 0%, transparent 60%); }
+        .wrapper { width: 100%; max-width: 500px; background: var(--panel); border: 1px solid rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        h1 { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; text-align: center; letter-spacing: 2px; margin-bottom: 5px; }
+        h1 span { color: var(--cyan); text-shadow: 0 0 10px rgba(0,243,255,0.5); }
+        .subtitle { text-align: center; color: #6a6a7a; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 25px; }
+        .tab { flex: 1; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); color: #fff; cursor: pointer; font-weight: 700; border-radius: 6px; transition: 0.3s; text-align: center; }
+        .tab:hover { border-color: var(--cyan); }
+        .tab.active { background: linear-gradient(45deg, rgba(0,243,255,0.1), transparent); border-color: var(--cyan); box-shadow: 0 0 15px rgba(0,243,255,0.2); }
+        .tab.active.ios { border-color: var(--magenta); background: linear-gradient(45deg, rgba(255,0,85,0.1), transparent); box-shadow: 0 0 15px rgba(255,0,85,0.2); }
+        .sens-panel { display: none; animation: slideUp 0.4s ease forwards; }
+        .sens-panel.active { display: block; }
+        .row { margin-bottom: 18px; }
+        .info { display: flex; justify-content: space-between; font-size: 1rem; margin-bottom: 6px; font-weight: 700; letter-spacing: 0.5px; }
+        .bar { width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden; }
+        .fill { height: 100%; width: 0; background: var(--cyan); transition: width 1s cubic-bezier(0.1, 1, 0.1, 1); box-shadow: 0 0 8px var(--cyan); }
+        .ios-panel .fill { background: var(--magenta); box-shadow: 0 0 8px var(--magenta); }
+        .dpi { text-align: center; font-size: 0.9rem; color: #8a8a9e; background: rgba(255,255,255,0.03); padding: 8px; border-radius: 6px; margin-top: 15px; border: 1px dashed rgba(255,255,255,0.1); }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <h1>KUMAIL <span>SOOMRO</span></h1>
+        <div class="subtitle">Esports Sensitivity Lab</div>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="switchOS('android', this)">ANDROID</div>
+            <div class="tab ios" onclick="switchOS('ios', this)">iOS DEVICE</div>
+        </div>
+
+        <!-- Android -->
+        <div id="android" class="sens-panel active">
+            <div class="row"><div class="info"><span>General</span><span>95%</span></div><div class="bar"><div class="fill" style="width: 95%;"></div></div></div>
+            <div class="row"><div class="info"><span>Red Dot</span><span>88%</span></div><div class="bar"><div class="fill" style="width: 88%;"></div></div></div>
+            <div class="row"><div class="info"><span>2x Scope</span><span>82%</span></div><div class="bar"><div class="fill" style="width: 82%;"></div></div></div>
+            <div class="row"><div class="info"><span>4x Scope</span><span>75%</span></div><div class="bar"><div class="fill" style="width: 75%;"></div></div></div>
+            <div class="dpi">⚡ Recommended DPI: 440 // Pointer Speed: Max</div>
+        </div>
+
+        <!-- iOS -->
+        <div id="ios" class="sens-panel">
+            <div class="row"><div class="info"><span>General</span><span>100%</span></div><div class="bar"><div class="fill" style="width: 100%;"></div></div></div>
+            <div class="row"><div class="info"><span>Red Dot</span><span>92%</span></div><div class="bar"><div class="fill" style="width: 92%;"></div></div></div>
+            <div class="row"><div class="info"><span>2x Scope</span><span>85%</span></div><div class="bar"><div class="fill" style="width: 85%;"></div></div></div>
+            <div class="row"><div class="info"><span>4x Scope</span><span>80%</span></div><div class="bar"><div class="fill" style="width: 80%;"></div></div></div>
+            <div class="dpi" style="color: var(--magenta);">🔥 Haptic Touch: Fast // Tracking Velocity: 1.0</div>
+        </div>
+    </div>
+
+    <script>
+        function switchOS(os, btn) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.sens-panel').forEach(p => p.classList.remove('active'));
+            const activePanel = document.getElementById(os);
+            activePanel.classList.add('active');
+            
+            // Dynamic animation reset and play
+            const fills = activePanel.querySelectorAll('.fill');
+            fills.forEach(f => {
+                const w = f.style.width;
+                f.style.width = '0';
+                setTimeout(() => { f.style.width = w; }, 50);
+            });
+        }
+    </script>
+</body>
+</html>
